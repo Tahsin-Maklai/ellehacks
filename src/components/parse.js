@@ -8,7 +8,7 @@ export function CSVReader() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.PUBLIC_URL + '/data.csv');
+        const response = await fetch(process.env.PUBLIC_URL + '/filtered_tweets_cancelled.csv');
         const text = await response.text();
         Papa.parse(text, {
           header: true,

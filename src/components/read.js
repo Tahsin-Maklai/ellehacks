@@ -10,7 +10,7 @@ export function Read() {
 
     useEffect(() => {
         const getdataCSV = async () => {
-            const res = await fetch("./data.csv");
+            const res = await fetch("./filtered_tweets_cancelled.csv");
             const text = await res.text();
             const data = Papa.parse(text);
 
