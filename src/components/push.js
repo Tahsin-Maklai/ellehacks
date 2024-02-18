@@ -1,12 +1,10 @@
-// import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
-import React, { useState } from 'react';
-
 
 export function Push() {
-    const [csvData, setCsvData] = useState([]);
-    const [header, setHeader] = useState([]);
-  useState(() => {
+  const [lastNotificationTime, setLastNotificationTime] = useState(null);
+
+  useEffect(() => {
     Notification.requestPermission();
 
     const checkTimeAndNotify = async () => {
@@ -17,28 +15,13 @@ export function Push() {
         Papa.parse(text, {
           header: true,
           quoteChar: '"',
-          // worker: true,
+          worker: true,
           complete: function(results) {
-            setCsvData(results.data);
-            setHeader(results.meta.fields);
-            // Assuming the Date field is in the "Date" column
-            const lastNotificationTime = setCsvData[0]?.Date;
-
-
-            // if (lastNotificationTime) {
-              const currentTime = new Date();
-              // console.log(currentTime)
-              console.log(lastNotificationTime)
-
-              // const notificationTime = parseNotificationTime(lastNotificationTime);
-
-
-              // Check if the time difference is within the last 5 minutes (300,000 milliseconds)
-
-              if (lastNotificationTime.trim().toLowerCase() !== "12:26 pm feb 16 2024") {
-                showNotification();
-              }
-            // }
+            const time = results.data[0]?.Date;
+            setLastNotificationTime(time); // Update lastNotificationTime state
+            if (time !== " 12:26 PM Feb 16 2024") {
+              showNotification();
+            }
           }
         });
       } catch (error) {
@@ -47,23 +30,17 @@ export function Push() {
     };
 
     // Check every minute (adjust the interval as needed)
-    const intervalId = setInterval(checkTimeAndNotify, 60000);
+    const intervalId = setInterval(checkTimeAndNotify, 600);
 
     // Cleanup on component unmount
     return () => clearInterval(intervalId);
   }, []);
-
-  // const parseNotificationTime = (dateString) => {
-  //   // Parse the date string and return a Date object
-  //   return new Date(dateString);
-  // };
 
   const showNotification = () => {
     new Notification('Bus Cancelled!', {
       body: 'Sync your data now!',
     });
   };
-  
 
   return (
     <div>
