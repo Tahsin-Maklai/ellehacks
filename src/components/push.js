@@ -24,16 +24,27 @@ export function Push() {
             const lastNotificationTime = setCsvData[0]?.Date;
 
 
+<<<<<<< HEAD
+=======
+            // if (lastNotificationTime) {
+>>>>>>> ccaea6a0e50128bef39c2ad32b66d9cd87aa2b88
               const currentTime = new Date();
               console.log(currentTime)
+              console.log(lastNotificationTime)
+
               const notificationTime = parseNotificationTime(lastNotificationTime);
 
 
               // Check if the time difference is within the last 5 minutes (300,000 milliseconds)
               if (currentTime - notificationTime <= 300000) {
                 showNotification();
+<<<<<<< HEAD
             
             }
+=======
+              }
+            // }
+>>>>>>> ccaea6a0e50128bef39c2ad32b66d9cd87aa2b88
           }
         });
       } catch (error) {
@@ -61,6 +72,10 @@ export function Push() {
 
   return (
     <div>
+<<<<<<< HEAD
+=======
+      <h1></h1>
+>>>>>>> ccaea6a0e50128bef39c2ad32b66d9cd87aa2b88
       <p>This is a React component.</p>
     </div>
   );
