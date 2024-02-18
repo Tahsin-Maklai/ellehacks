@@ -5,7 +5,7 @@ from openai import OpenAI
 cwd = os.path.dirname(os.path.abspath(__file__))
 print(cwd)
 
-# UNCOMMENT IF YOU WANT TO RUN THE PROGRAM
+# ADD SECRET_KEY IF YOU WANT TO RUN THE PROGRAM
 KEY = ""
 client = OpenAI(api_key = KEY)
 
