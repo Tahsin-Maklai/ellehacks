@@ -13,21 +13,22 @@ export function Push() {
         Papa.parse(text, {
           header: true,
           quoteChar: '"',
-          worker: true,
+          // worker: true,
           complete: function(results) {
             // Assuming the Date field is in the "Date" column
             const lastNotificationTime = results.data[0]?.Date;
 
             // if (lastNotificationTime) {
               const currentTime = new Date();
-              console.log(currentTime)
+              // console.log(currentTime)
               console.log(lastNotificationTime)
 
               // const notificationTime = parseNotificationTime(lastNotificationTime);
 
 
               // Check if the time difference is within the last 5 minutes (300,000 milliseconds)
-              if (lastNotificationTime != " 12:26 PM Feb 16 2024") {
+
+              if (lastNotificationTime.trim().toLowerCase() !== "12:26 pm feb 16 2024") {
                 showNotification();
               }
             // }
