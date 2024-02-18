@@ -20,29 +20,6 @@ export function Read() {
         getdataCSV();
     }, [])
 
-    // return (
-    //     <div>
-    //       <input type="file"/>
-    //       <table>
-    //         <thead>
-    //           <tr>
-    //             {header.map((field, index) => (
-    //               <th key={index}>{field}</th>
-    //             ))}
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           {dataCSV.map((row, rowIndex) => (
-    //             <tr key={rowIndex}>
-    //               {header.map((field, index) => (
-    //                 <td key={index}>{row[field]}</td>
-    //               ))}
-    //             </tr>
-    //           ))}
-    //         </tbody>
-    //       </table>
-    //     </div>
-    //   );
     return (
         <div>
             <h2>List of bus cancellations</h2>

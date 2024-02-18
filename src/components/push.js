@@ -18,9 +18,10 @@ export function Push() {
           worker: true,
           complete: function(results) {
             const time = results.data[0]?.Date;
+            const content = results.data[0]?.Content;
             setLastNotificationTime(time); // Update lastNotificationTime state
             if (time !== " 12:26 PM Feb 16 2024") {
-              showNotification();
+              showNotification(content);
             }
           }
         });
@@ -30,15 +31,15 @@ export function Push() {
     };
 
     // Check every minute (adjust the interval as needed)
-    const intervalId = setInterval(checkTimeAndNotify, 600);
+    const intervalId = setInterval(checkTimeAndNotify, 5000);
 
     // Cleanup on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
-  const showNotification = () => {
+  const showNotification = (content) => {
     new Notification('Bus Cancelled!', {
-      body: 'Sync your data now!',
+      body: content,
     });
   };
 
