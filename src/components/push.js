@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import Papa from 'papaparse';
+import React, { useState } from 'react';
+
 
 export function Push() {
-  useEffect(() => {
+    const [csvData, setCsvData] = useState([]);
+    const [header, setHeader] = useState([]);
+  useState(() => {
     Notification.requestPermission();
 
     const checkTimeAndNotify = async () => {
@@ -15,8 +19,11 @@ export function Push() {
           quoteChar: '"',
           // worker: true,
           complete: function(results) {
+            setCsvData(results.data);
+            setHeader(results.meta.fields);
             // Assuming the Date field is in the "Date" column
-            const lastNotificationTime = results.data[0]?.Date;
+            const lastNotificationTime = setCsvData[0]?.Date;
+
 
             // if (lastNotificationTime) {
               const currentTime = new Date();
