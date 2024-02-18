@@ -17,9 +17,11 @@ export function Push() {
             // Assuming the Date field is in the "Date" column
             const lastNotificationTime = results.data[0]?.Date;
 
-            if (lastNotificationTime) {
+            // if (lastNotificationTime) {
               const currentTime = new Date();
               console.log(currentTime)
+              console.log(lastNotificationTime)
+
               const notificationTime = parseNotificationTime(lastNotificationTime);
 
 
@@ -27,7 +29,7 @@ export function Push() {
               if (currentTime - notificationTime <= 300000) {
                 showNotification();
               }
-            }
+            // }
           }
         });
       } catch (error) {
@@ -55,7 +57,7 @@ export function Push() {
 
   return (
     <div>
-      <h1>Hello, React!</h1>
+      <h1></h1>
       <p>This is a React component.</p>
     </div>
   );

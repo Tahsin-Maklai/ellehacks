@@ -12,6 +12,7 @@ export function CSVReader() {
         const text = await response.text();
         Papa.parse(text, {
           header: true,
+          quoteChar: '"',
           newline: '\n',
           complete: function(results) {
             setCsvData(results.data);
