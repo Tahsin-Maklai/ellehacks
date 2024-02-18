@@ -45,7 +45,7 @@ export function Read() {
     //   );
     return (
         <div>
-            <h2>List of bus cancellation</h2>
+            <h2>List of bus cancellations</h2>
             <ul>
                 {dataCSV.map((row, index) => (
                     <li key={index}>
@@ -56,5 +56,5 @@ export function Read() {
         </div>
     );
     
-    <div>My name is Tahsin</div>
+    // <div>My name is Tahsin</div>
 }

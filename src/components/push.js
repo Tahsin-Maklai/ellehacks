@@ -13,6 +13,7 @@ export function Push() {
         Papa.parse(text, {
           header: true,
           quoteChar: '"',
+          worker: true,
           complete: function(results) {
             // Assuming the Date field is in the "Date" column
             const lastNotificationTime = results.data[0]?.Date;
@@ -22,11 +23,11 @@ export function Push() {
               console.log(currentTime)
               console.log(lastNotificationTime)
 
-              const notificationTime = parseNotificationTime(lastNotificationTime);
+              // const notificationTime = parseNotificationTime(lastNotificationTime);
 
 
               // Check if the time difference is within the last 5 minutes (300,000 milliseconds)
-              if (currentTime - notificationTime <= 300000) {
+              if (lastNotificationTime != " 12:26 PM Feb 16 2024") {
                 showNotification();
               }
             // }
@@ -44,21 +45,21 @@ export function Push() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const parseNotificationTime = (dateString) => {
-    // Parse the date string and return a Date object
-    return new Date(dateString);
-  };
+  // const parseNotificationTime = (dateString) => {
+  //   // Parse the date string and return a Date object
+  //   return new Date(dateString);
+  // };
 
   const showNotification = () => {
-    new Notification('Sync Data', {
+    new Notification('Bus Cancelled!', {
       body: 'Sync your data now!',
     });
   };
+  
 
   return (
     <div>
-      <h1></h1>
-      <p>This is a React component.</p>
+      <h2>List of bus cancellations</h2>
     </div>
   );
 }

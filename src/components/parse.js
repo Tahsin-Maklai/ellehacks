@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Papa from 'papaparse';
+import * as Papa from 'papaparse';
 
 export function CSVReader() {
   const [csvData, setCsvData] = useState([]);
@@ -13,7 +13,7 @@ export function CSVReader() {
         Papa.parse(text, {
           header: true,
           quoteChar: '"',
-          newline: '\n',
+          newline: "\n",
           complete: function(results) {
             setCsvData(results.data);
             setHeader(results.meta.fields);
@@ -28,24 +28,30 @@ export function CSVReader() {
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            {header.map((field, index) => (
-              <th key={index}>{field}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {csvData.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+      {csvData.length > 0 && header.length > 0 && (
+        <table>
+          <thead>
+            <tr>
               {header.map((field, index) => (
-                <td key={index}>{row[field]}</td>
+                <th key={index}>{field}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {csvData.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {header.map((field, index) => (
+                  <td key={index}>
+                    {row[field] && (
+                      <div dangerouslySetInnerHTML={{ __html: row[field].replace(/\n/g, '<br />') }} />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

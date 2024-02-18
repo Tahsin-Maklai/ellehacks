@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import {Read} from './components/read.js';
+// import {Read} from './components/read.js';
 import {CSVReader} from './components/parse.js';
 import {Alert} from './components/notification.js';
 import {Push} from './components/push.js';
@@ -13,7 +12,7 @@ function App() {
         <Alert/>
         <CSVReader/>
         <Push/>
-        <Read/>
+        {/* <Read/> */}
 
       </header>
     </div>
