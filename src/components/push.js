@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import Papa from 'papaparse';
+import React, { useState } from 'react';
+
 
 export function Push() {
-  useEffect(() => {
+    const [csvData, setCsvData] = useState([]);
+    const [header, setHeader] = useState([]);
+  useState(() => {
     Notification.requestPermission();
 
     const checkTimeAndNotify = async () => {
@@ -14,10 +18,12 @@ export function Push() {
           header: true,
           quoteChar: '"',
           complete: function(results) {
+            setCsvData(results.data);
+            setHeader(results.meta.fields);
             // Assuming the Date field is in the "Date" column
-            const lastNotificationTime = results.data[0]?.Date;
+            const lastNotificationTime = setCsvData[0]?.Date;
 
-            if (lastNotificationTime) {
+
               const currentTime = new Date();
               console.log(currentTime)
               const notificationTime = parseNotificationTime(lastNotificationTime);
@@ -26,7 +32,7 @@ export function Push() {
               // Check if the time difference is within the last 5 minutes (300,000 milliseconds)
               if (currentTime - notificationTime <= 300000) {
                 showNotification();
-              }
+            
             }
           }
         });
@@ -55,7 +61,6 @@ export function Push() {
 
   return (
     <div>
-      <h1>Hello, React!</h1>
       <p>This is a React component.</p>
     </div>
   );
